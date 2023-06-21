@@ -1,11 +1,15 @@
 package com.gquesada.notes.ui.notes
 
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,6 +46,12 @@ class NoteListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.onViewReady()
+
+        val button: Button = view.findViewById(R.id.button)
+
+        button.setOnClickListener{
+            changeFragment()
+        }
     }
 
     private fun initViews(view: View) {
@@ -68,5 +78,24 @@ class NoteListFragment : Fragment() {
     private fun onListItemClicked(noteModel: NoteModel) {
         Toast.makeText(context, "${noteModel.title} was clicked", Toast.LENGTH_LONG).show()
         // Todo remove item
+        viewModel.deleteNote(noteModel.id)
+
+        viewModel.onViewReady()
+    }
+
+    fun changeFragment() {
+//        val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+//
+//        transaction.replace(R.id.fragment_container, AddNotesFragment())
+//
+//        transaction.addToBackStack(null)
+//        transaction.commit()
+
+        val fragmentManager: FragmentManager = requireFragmentManager()
+        val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, AddNotesFragment())
+        transaction.addToBackStack(null)
+        transaction.commit()
+
     }
 }

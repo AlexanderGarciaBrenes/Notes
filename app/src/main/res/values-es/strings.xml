@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Notes</string>
+    <string name="addNote">Agregar Nota</string>
+    <string name="title">Titulo</string>
+    <string name="description">Descripcion</string>
+    <string name="tagTitle">Titulo de tag</string>
+    <string name="date">Fecha</string>
+</resources>
